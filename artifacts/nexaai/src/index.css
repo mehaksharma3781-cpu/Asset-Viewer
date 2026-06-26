@@ -1,0 +1,119 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+:root {
+  /* NexaAI Brand Colors */
+  --arctic-powder:         #F1F6F4;
+  --mystic-mint:           #D9E8E2;
+  --forsythia:             #FFC801;
+  --deep-saffron:          #FF9932;
+  --nocturnal-expedition:  #114C5A;
+  --oceanic-noir:          #172B36;
+
+  /* Tailwind theme tokens — map to NexaAI palette */
+  --background:            194 35% 16%;   /* oceanic-noir */
+  --foreground:            160 20% 95%;   /* arctic-powder */
+  --card:                  193 70% 21%;   /* nocturnal-expedition */
+  --card-foreground:       160 20% 95%;
+  --card-border:           193 30% 35%;
+  --popover:               193 70% 21%;
+  --popover-foreground:    160 20% 95%;
+  --popover-border:        193 30% 35%;
+  --primary:               46 100% 50%;  /* forsythia */
+  --primary-foreground:    194 35% 16%;  /* oceanic-noir */
+  --primary-border:        46 100% 45%;
+  --secondary:             193 70% 21%;
+  --secondary-foreground:  160 20% 95%;
+  --secondary-border:      193 30% 35%;
+  --muted:                 193 50% 25%;
+  --muted-foreground:      160 25% 75%;
+  --accent:                46 100% 50%;
+  --accent-foreground:     194 35% 16%;
+  --accent-border:         46 100% 45%;
+  --destructive:           0 72% 51%;
+  --destructive-foreground: 160 20% 95%;
+  --destructive-border:    0 72% 45%;
+  --border:                193 30% 30%;
+  --input:                 193 40% 28%;
+  --ring:                  46 100% 50%;
+  --chart-1:               46 100% 50%;
+  --chart-2:               193 70% 40%;
+  --chart-3:               30 100% 60%;
+  --chart-4:               160 40% 65%;
+  --chart-5:               220 50% 60%;
+  --sidebar:               193 70% 21%;
+  --sidebar-foreground:    160 20% 95%;
+  --sidebar-border:        193 30% 30%;
+  --sidebar-primary:       46 100% 50%;
+  --sidebar-primary-foreground: 194 35% 16%;
+  --sidebar-accent:        193 50% 25%;
+  --sidebar-accent-foreground: 160 20% 95%;
+  --sidebar-ring:          46 100% 50%;
+  --radius: 0.5rem;
+
+  --button-outline: rgba(0,0,0,.10);
+  --badge-outline: rgba(0,0,0,.05);
+  --opaque-button-border-intensity: -8;
+  --elevate-1: rgba(255,255,255,.04);
+  --elevate-2: rgba(255,255,255,.09);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    background-color: var(--oceanic-noir);
+    color: var(--arctic-powder);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+  }
+  button {
+    cursor: pointer;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+/* ===== KEYFRAMES ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blobFloat {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  33% {
+    transform: translateY(-30px) scale(1.05);
+  }
+  66% {
+    transform: translateY(20px) scale(0.97);
+  }
+}
+
+@keyframes blobPulse {
+  0%, 100% { opacity: 0.08; }
+  50% { opacity: 0.13; }
+}

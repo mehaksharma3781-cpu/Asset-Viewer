@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "NexaAI Landing Page"
+version = "1.0.0"
+id = "artifacts/nexaai"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19262
+
+[services.development]
+run = "pnpm --filter @workspace/nexaai run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/nexaai", "run", "build" ]
+publicDir = "artifacts/nexaai/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19262"
+BASE_PATH = "/"

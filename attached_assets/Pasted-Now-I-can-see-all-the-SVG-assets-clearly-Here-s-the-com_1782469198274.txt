@@ -1,0 +1,262 @@
+Now I can see all the SVG assets clearly. Here's the complete, updated prompt with all assets mapped in:
+
+---
+
+**PASTE THIS ENTIRE PROMPT INTO REPLIT AGENT:**
+
+---
+
+```
+Build a premium, high-converting, fully responsive SaaS landing page for a "Next-Gen AI Data Automation Platform" using React + Vite + Tailwind CSS.
+
+═══════════════════════════════════════
+STRICT RULES — READ FIRST
+═══════════════════════════════════════
+- NO Framer Motion, NO Shadcn, NO Radix, NO HeadlessUI, NO external animation libraries
+- ALL animations: native CSS transitions / @keyframes / Web Animations API (WAAPI) ONLY
+- Currency/billing toggle must NEVER re-render parent components — use useRef to mutate price DOM text nodes directly
+- ALL SVG icons must be inline (no <img> tags for icons)
+- Semantic HTML only: <header>, <main>, <section>, <footer>, <nav>, <article>
+
+═══════════════════════════════════════
+FONTS — Load via Google Fonts in index.html
+═══════════════════════════════════════
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+- JetBrains Mono → All headings, navbar brand, pricing numbers, section labels, code-style text
+- Inter → Body copy, descriptions, button text, captions, form elements
+
+═══════════════════════════════════════
+COLOR PALETTE — Define as CSS variables, use NOWHERE else
+═══════════════════════════════════════
+:root {
+  --arctic-powder:         #F1F6F4;
+  --mystic-mint:           #D9E8E2;
+  --forsythia:             #FFC801;
+  --deep-saffron:          #FF9932;
+  --nocturnal-expedition:  #114C5A;
+  --oceanic-noir:          #172B36;
+}
+
+═══════════════════════════════════════
+SVG ASSETS — Create these files in /src/assets/icons/ and use them as inline React components
+═══════════════════════════════════════
+Create these exact SVG files as React components in /src/assets/icons/:
+
+1. ArrowPath.jsx — circular refresh/sync arrows icon (two curved arrows forming a circle with arrowheads)
+2. ArrowTrendingUp.jsx — trending up chart arrow (zigzag line going up-right with arrowhead)
+3. ChartPie.jsx — pie chart icon (circle with one slice cut out)
+4. ChevronDown.jsx — downward V chevron
+5. ChevronLeft.jsx — leftward < chevron
+6. ChevronRight.jsx — rightward > chevron
+7. ChevronUp.jsx — upward ^ chevron (outline style)
+8. ChevronUpSolid.jsx — upward ^ chevron (slightly bolder/solid style)
+9. CogEightTooth.jsx — gear/settings icon with 8 wavy teeth
+10. CubeSixteenSolid.jsx — 3D cube solid icon (isometric box)
+11. LinkSolid.jsx — chain link icon (two oval chain links, filled/solid)
+12. Link.jsx — chain link icon (two oval chain links, outline style)
+13. Search.jsx — magnifying glass icon
+14. XMark.jsx — X close icon (two crossed lines)
+
+Use these icons throughout the page as described below. Color them using currentColor so they inherit from parent CSS.
+
+═══════════════════════════════════════
+PAGE STRUCTURE
+═══════════════════════════════════════
+
+━━━ SECTION 1: NAVBAR ━━━
+- Sticky <header> with backdrop-blur
+- Left: Brand logo text "NexaAI" in JetBrains Mono + CubeSixteenSolid icon beside it, color --forsythia
+- Center: Nav links — Features, Pricing, Integrations, Docs — Inter font, color --arctic-powder
+- Right: Search icon (Search.jsx) button + "Get Started" CTA button with --forsythia background, --oceanic-noir text
+- Mobile: hamburger menu using XMark.jsx / ChevronDown.jsx, slide-down drawer
+- Background: --oceanic-noir with slight transparency + blur
+- Transition on scroll: add solid background after 50px scroll
+
+━━━ SECTION 2: HERO ━━━
+- Full viewport height <section>
+- Background: deep gradient from --oceanic-noir to --nocturnal-expedition
+- Animated background: 3 large blob shapes using CSS @keyframes (float + pulse), colors --forsythia at 10% opacity and --deep-saffron at 8% opacity
+- Badge chip above headline: "AI-Powered Automation" label with ArrowTrendingUp icon, --forsythia text, border --forsythia/30
+- H1 headline (JetBrains Mono, bold, large): "Automate Everything. Scale Without Limits."
+- Subheadline (Inter): "The next-generation AI platform that transforms raw data into intelligent workflows — in real time."
+- Two CTA buttons:
+  → Primary: "Start Free Trial" — --forsythia bg, --oceanic-noir text, ArrowTrendingUp icon
+  → Secondary: "Watch Demo" — transparent, --arctic-powder border, --arctic-powder text, ChevronRight icon
+- Stats row below CTAs: "10M+ Data Points" | "99.9% Uptime" | "150+ Integrations" — JetBrains Mono numbers, Inter labels
+- Entry animation: all elements fade-up sequentially with CSS animation-delay, total under 400ms, no JS blocking
+
+━━━ SECTION 3: FEATURES — BENTO-TO-ACCORDION (Feature 2) ━━━
+
+IMPORTANT ARCHITECTURE:
+- Use a single activeIndex state (useState) in the parent FeatureSection component
+- Use a ResizeObserver to detect when viewport crosses 768px
+- When crossing from desktop→mobile, transfer the current hovered bento index to the accordion open index
+- When crossing from mobile→desktop, sync the open accordion index back to the highlighted bento card
+
+DESKTOP (≥768px) — Bento Grid:
+CSS Grid layout, asymmetric bento style:
+- Card 1 (large, spans 2 cols): "Intelligent Data Pipeline" — ArrowPath icon — describes automated ETL flows
+- Card 2: "Real-Time Analytics" — ChartPie icon
+- Card 3: "Smart Integrations" — Link icon  
+- Card 4 (wide): "Predictive Modeling" — ArrowTrendingUp icon
+- Card 5: "Workflow Automation" — CogEightTooth icon
+- Card 6: "Enterprise Security" — CubeSixteenSolid icon
+
+Each card:
+- Background: --nocturnal-expedition with subtle gradient
+- Border: 1px solid --mystic-mint/20
+- Icon: colored --forsythia
+- Title: JetBrains Mono, --arctic-powder
+- Description: Inter, --mystic-mint
+- Hover: transform scale(1.02), border-color --forsythia, box-shadow --forsythia/20 — transition 180ms ease-out
+- onMouseEnter: set activeIndex = card index
+- Active card (activeIndex match): glowing --forsythia border
+
+MOBILE (<768px) — Accordion:
+- Same 6 features as vertical accordion list
+- Each item: header row with icon + title + ChevronDown/ChevronUp icon
+- Tap to expand: smooth height transition using max-height CSS transition, 350ms ease-in-out
+- Only one panel open at a time
+- Open panel shows description with fade-in, 200ms
+- NO external accordion library — use useRef for the content div, set maxHeight style directly
+- Active panel: --forsythia left border accent
+
+CONTEXT LOCK (critical):
+```js
+// In useEffect, watch window resize:
+const observer = new ResizeObserver(() => {
+  const isMobile = window.innerWidth < 768;
+  if (isMobile && previousWasDesktop) {
+    setAccordionIndex(bentoHoverIndex.current);
+  }
+  if (!isMobile && previousWasMobile) {
+    bentoHoverIndex.current = accordionIndex;
+  }
+});
+```
+
+━━━ SECTION 4: PRICING (Feature 1) ━━━
+
+ARCHITECTURE — STATE ISOLATION (critical for 15 pts):
+```jsx
+// PricingSection.jsx — parent renders layout ONCE, never re-renders
+// PriceDisplay.jsx — isolated child with its own local state
+// Uses useRef to directly set textContent on price span nodes
+
+const PriceDisplay = ({ tier }) => {
+  const priceRef = useRef(null);
+  const [billing, setBilling] = useSharedPricingState(); // context or prop drill
+  
+  useEffect(() => {
+    if (priceRef.current) {
+      priceRef.current.textContent = computePrice(tier, billing.cycle, billing.currency);
+    }
+  }, [billing]);
+  
+  return <span ref={priceRef} />;
+};
+```
+
+PRICING MATRIX CONFIG (no hardcoded values in JSX):
+```js
+const pricingMatrix = {
+  tiers: ['Starter', 'Pro', 'Enterprise'],
+  baseRates: {
+    Starter:    { USD: 29,   INR: 2400,  EUR: 27  },
+    Pro:        { USD: 79,   INR: 6500,  EUR: 72  },
+    Enterprise: { USD: 199,  INR: 16500, EUR: 182 },
+  },
+  annualMultiplier: 0.8,
+  tariffVariables:  { INR: 1.05, USD: 1.00, EUR: 1.02 },
+  symbols:          { INR: '₹',  USD: '$',  EUR: '€'  },
+};
+
+function computePrice(tier, cycle, currency) {
+  const base    = pricingMatrix.baseRates[tier][currency];
+  const tariff  = pricingMatrix.tariffVariables[currency];
+  const mult    = cycle === 'annual' ? pricingMatrix.annualMultiplier : 1;
+  return Math.round(base * mult * tariff);
+}
+```
+
+CONTROLS:
+- Billing toggle: "Monthly" / "Annual" pill toggle — 180ms ease-out, --forsythia active bg
+- Currency dropdown: INR / USD / EUR — custom styled select using ChevronDown icon, NO global re-render on change
+
+PRICING CARDS:
+- 3 cards side by side desktop, stacked mobile
+- Starter: --nocturnal-expedition bg, --arctic-powder text
+- Pro (middle/featured): --forsythia bg, --oceanic-noir text, "Most Popular" badge, scale(1.05) on desktop
+- Enterprise: --oceanic-noir bg, --arctic-powder text, --forsythia border
+- Each card shows:
+  → Plan name (JetBrains Mono)
+  → Currency symbol + price (JetBrains Mono, large) — this is the isolated text node
+  → "/month" or "/year" label
+  → Annual: show strikethrough original price + savings badge
+  → Feature list with LinkSolid checkmark icons
+  → CTA button
+
+━━━ SECTION 5: SOCIAL PROOF ━━━
+- Section label: "Trusted by 500+ Teams" — JetBrains Mono, --forsythia
+- 3 testimonial cards in a row (stack on mobile)
+- Each: avatar circle (initials, --forsythia bg), name, role/company, quote text
+- Card bg: --nocturnal-expedition, border --mystic-mint/20
+- Hover: translateY(-4px), 180ms ease-out
+
+━━━ SECTION 6: FOOTER ━━━
+- Semantic <footer>, bg --oceanic-noir
+- Left: Brand + tagline
+- Middle: Link columns — Product, Company, Resources
+- Right: Social icons using ArrowTrendingUp (Twitter), Link (LinkedIn), Search (GitHub) — style appropriately
+- Bottom bar: copyright text, --mystic-mint color
+- Divider: 1px --nocturnal-expedition
+
+═══════════════════════════════════════
+SEO & META — Add to index.html <head>
+═══════════════════════════════════════
+<title>NexaAI — Next-Gen AI Data Automation Platform</title>
+<meta name="description" content="NexaAI automates complex data workflows with AI-driven pipelines, real-time analytics, and enterprise-grade security. Start free today.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="NexaAI — Next-Gen AI Data Automation Platform">
+<meta property="og:description" content="Transform raw data into intelligent workflows in real time.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+Every SVG icon must have aria-label. Every section must have aria-labelledby pointing to its heading.
+
+═══════════════════════════════════════
+ANIMATION RULES
+═══════════════════════════════════════
+- Micro-interactions (hover, toggle, button): 150ms–200ms, cubic-bezier(0,0,0.2,1) ease-out
+- Structural transitions (accordion open/close, layout shift): 300ms–400ms, cubic-bezier(0.4,0,0.2,1) ease-in-out
+- Page entry (hero elements): CSS @keyframes fadeUp, staggered with animation-delay, total <400ms
+- Hero blobs: CSS @keyframes with translateY + scale, 6s–8s loop, ease-in-out
+- NO JS-driven animation loops
+- Use transform and opacity only (GPU accelerated) — never animate width/height/top/left directly
+
+═══════════════════════════════════════
+FILE STRUCTURE
+═══════════════════════════════════════
+/src
+  /assets/icons/         ← all 14 SVG React components
+  /components/
+    Navbar.jsx
+    HeroSection.jsx
+    FeatureSection.jsx   ← Bento + Accordion with context lock
+    PricingSection.jsx   ← parent layout (never re-renders)
+    PriceDisplay.jsx     ← isolated price node component
+    Testimonials.jsx
+    Footer.jsx
+  /hooks/
+    useResizeObserver.js
+  /utils/
+    pricingMatrix.js
+  App.jsx
+  index.css             ← CSS variables, global styles, keyframes
+index.html              ← fonts, meta tags
+```
+
+---
+
+This covers every single scoring point. Good luck — you've got this!
