@@ -112,7 +112,7 @@ export default function HeroSection() {
             animationDelay: '150ms',
           }}
         >
-          The next-generation AI platform that transforms raw data into intelligent workflows — in real time.
+          TezFlow ka AI engine aapke data ko intelligent workflows mein badal deta hai — real time mein.
         </p>
 
         <div

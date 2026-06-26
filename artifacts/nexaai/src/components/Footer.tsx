@@ -12,10 +12,10 @@ export default function Footer() {
           <div style={{ maxWidth: '300px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '20px' }}>
               <CubeSixteenSolid style={{ color: 'var(--forsythia)', width: '28px', height: '28px' }} />
-              <span style={{ fontFamily: 'JetBrains Mono, monospace', fontWeight: 800, color: 'var(--forsythia)', fontSize: '1.5rem' }}>NexaAI</span>
+              <span style={{ fontFamily: 'JetBrains Mono, monospace', fontWeight: 800, color: 'var(--forsythia)', fontSize: '1.5rem' }}>TezFlow</span>
             </div>
             <p style={{ fontFamily: 'Inter, sans-serif', color: 'var(--mystic-mint)', fontSize: '0.95rem', lineHeight: 1.6 }}>
-              Automate everything. Scale without limits. Transforming raw data into intelligent workflows.
+              Tez Raho. Flow Karo. Scale Karo.
             </p>
           </div>
 
@@ -59,7 +59,7 @@ export default function Footer() {
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
           <p style={{ fontFamily: 'Inter, sans-serif', color: 'var(--mystic-mint)', fontSize: '0.85rem', margin: 0 }}>
-            © {new Date().getFullYear()} NexaAI. All rights reserved.
+            © 2026 TezFlow. All rights reserved.
           </p>
           <div style={{ display: 'flex', gap: '16px' }}>
             <button style={{ background: 'transparent', border: 'none', color: 'var(--mystic-mint)', cursor: 'pointer', padding: '4px', transition: 'color 150ms' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--arctic-powder)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--mystic-mint)'} aria-label="Twitter">

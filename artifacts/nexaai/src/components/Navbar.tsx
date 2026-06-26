@@ -30,7 +30,7 @@ export default function Navbar() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 24px', height: '64px', maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <CubeSixteenSolid style={{ color: 'var(--forsythia)', width: '24px', height: '24px' }} />
-          <span style={{ fontFamily: 'JetBrains Mono, monospace', fontWeight: 700, color: 'var(--forsythia)', fontSize: '1.25rem' }}>NexaAI</span>
+          <span style={{ fontFamily: 'JetBrains Mono, monospace', fontWeight: 700, color: 'var(--forsythia)', fontSize: '1.25rem' }}>TezFlow</span>
         </div>
         
         {/* Desktop Nav */}
